@@ -14,9 +14,9 @@ body
 h1
 {
     color: whitesmoke;
-    text-align: center;
+    <!--text-align: center;
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 30px;-->
 }
 
 #header
@@ -52,14 +52,15 @@ h1
 
 #mainContent
 {
-    clear: both;
-    float: center;
+    <!--clear: both;
+    float: center;-->
     font-size: 20px;
     background-color: #686F7C;
-    padding-top: 300px;
+    <!-- padding-top: 300px;
     padding-bottom: 50px;
     border-radius: 25px;
     text-align: center;
+    -->
 }
 
 #footer
@@ -78,6 +79,9 @@ h1
     margin-right: 1%;
 }
 
+th, td {width:30px}
+
+
 a:link
 {
     text-decoration: none;   
@@ -89,63 +93,3 @@ a:visited
     text-decoration: none;   
     color: whitesmoke; 
 }
-
-
-
-.login-form {
-	width: 300px;
-	margin: 0 auto;
-	font-family: Tahoma, Geneva, sans-serif;
-}
-
-.login-form h1 {
-	text-align: center;
-	color: #4d4d4d;
-	font-size: 24px;
-	padding: 20px 0 20px 0;
-}
-
-
-.login-form input[type="password"],
-.login-form input[type="text"] {
-	width: 100%;
-	padding: 15px;
-	border: 1px solid #dddddd;
-	margin-bottom: 15px;
-	box-sizing:border-box;
-}
-
-
-.login-form input[type="submit"] {
-	width: 100%;
-	padding: 15px;
-	background-color: #535b63;
-	border: 0;
-	box-sizing: border-box;
-	cursor: pointer;
-	font-weight: bold;
-	color: #ffffff;
-}
-
-
-
-
-.login-form input[name="register"]{
-	margin-top: 10px;
-        width: 42%;
-        padding: 15px;
-        background-color: #535b63;
-        border: 0;
-        box-sizing: border-box;
-        cursor: pointer;
-        font-weight: bold;
-        color: #ffffff;
-
-
-}
-
-
-
-
-
-
