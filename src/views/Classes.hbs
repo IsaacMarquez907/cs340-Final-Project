@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href = "customization.css">
+        <link rel="stylesheet" href = "styles.css">
         <title>RateMyStudents: Classes</title>
     </head>
     <body>
@@ -18,8 +18,35 @@
                 </div>
             </div>
             <div id="mainContent">
-                <p1>Good things and cool stuff</p1>
-            </div>
+            	<table>
+			<thead>
+				<th>Class Name</th>
+				<th>CourseID</th>
+				<th>Department</th>
+				<th>Username</th>
+			</thead>
+
+			<tbody>
+				{{#each results}}
+				<tr>
+					<td>
+						{{this.name}}
+					</td>
+					<td>
+						{{this.course_id}}
+					</td>
+					<td>
+						{{this.department}}
+					</td>
+					<td>
+						{{this.username}}
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		
+	    </div>
             <div id="footer">
                 <p5>Created by the GOAT Development team in 2019</p5>
             </div>
