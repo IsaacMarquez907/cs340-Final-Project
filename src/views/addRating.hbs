@@ -1,0 +1,40 @@
+<DOCTYPE html>
+<html>
+        <body>
+                <div class="login-form">
+                        <h1>Add a new Rating</h1>
+                        <form action="insert-rating" method="POST">
+                                <label class='fieldLabel'> Student ID</label>
+				<input type="text" name="studentID" placeholder="StudentID" required>
+
+                                <label class='fieldLabel'> Student Full Name</label>
+                                <input type="text" name="name" placeholder="Student Name" required>
+
+                                <label class='fieldLabel'>Term</label>
+                                <select class="dropDown" name="term">
+                                        {{#each terms}}
+                                                <option>{{this.Season}}, {{this.year}}</option>
+                                        {{/each}}
+                                </select>
+
+                                
+                                <label class='fieldLabel'>Course ID</label>
+				<input type="text" name="class" placeholder="Class" required>
+
+                                <label class='fieldLabel'>Rate student on scale of 7-233</label>
+                                <input type="text" name="scale" placeholder="Number Scale 7-233" required>
+
+                                <label class='fieldLabel'>Comment, max 280 characters</label>
+				<input type="text" name="comment" placeholder="Comment (max 280 chars.)" required>
+
+
+                                <input type="submit">
+                        </form>
+                </div>
+                <div class="login-form">
+			<form action="/home">				
+				<input type="submit" name="register" value="Home">
+			</form>
+		</div>
+        </body>
+</html>

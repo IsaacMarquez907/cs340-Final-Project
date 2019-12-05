@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href = "customization.css">
+        <link rel="stylesheet" href = "styles.css">
         <title>RateMyStudents: Classes</title>
     </head>
     <body>
@@ -14,12 +14,49 @@
                         <tr><td><a href="/Classes">Classes</a></td></tr>
                         <tr><td><a href="/ratings">Ratings</a></td></tr>
                         <tr><td><a href="/Terms">Terms</a></td></tr>
+                       {{#if logStatus}}
+                        {{else}}
+                            <tr><td><a href="/login">Login</a></td></tr>
+                        {{/if}}
+                       {{#if logStatus}}
+                            <tr><td><a href="/addRating">Add Rating</a></td></tr>
+                        {{/if}}
+                       {{#if logStatus}}
+                            <tr><td><a href="/logout">Logout</a></td></tr>
+                        {{/if}}
                     </table>
                 </div>
             </div>
             <div id="mainContent">
-                <p1>Good things and cool stuff</p1>
-            </div>
+            	<table>
+			<thead>
+				<th>Class Name</th>
+				<th>CourseID</th>
+				<th>Department</th>
+				<th>Username</th>
+			</thead>
+
+			<tbody>
+				{{#each results}}
+				<tr>
+					<td>
+						{{this.name}}
+					</td>
+					<td>
+						{{this.course_id}}
+					</td>
+					<td>
+						{{this.department}}
+					</td>
+					<td>
+						{{this.username}}
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		
+	    </div>
             <div id="footer">
                 <p5>Created by the GOAT Development team in 2019</p5>
             </div>
