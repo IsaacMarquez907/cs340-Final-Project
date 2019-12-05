@@ -79,6 +79,7 @@ app.get('/', connectDb, function(req, res) {
  *If it is a successful login in the user will go back to the home page
  *
  */
+var loggedin = false;
 app.post('/auth', connectDb, function(req, res) {
 
 	var email = req.body.email;
@@ -94,6 +95,7 @@ app.post('/auth', connectDb, function(req, res) {
 				//confirm password is correct
 				if(bcrypt.compareSync(password, results[0].password)){
 					req.session.loggedin = true;
+					loggedin = true;
 					res.redirect('/home'); //send to home
 				}else{
 									
@@ -252,13 +254,6 @@ app.get("/Terms", (req, res) => {
 });
 app.get("/Classes", connectDb, (req, res) => {
 	req.db.query('SELECT * FROM Class', (err, results) => {
-	res.render("home");
-});
-app.get("/Terms", (req, res) => {
-        res.render("Terms");
-});
-app.get("/Classes", (req, res) => {
-	req.db.query('SELECT * FROM Class'), (err, results) => {
 		if (err) throw err;
 		console.log(results);
 		res.render("Classes", {results:results});
@@ -271,7 +266,6 @@ app.get("/ratings", (req, res) => {
 	}else{
 		res.render("ratings");
 	}
-        res.render("ratings");
 });
 app.get("/login", (req, res) => {
 	res.render("login");

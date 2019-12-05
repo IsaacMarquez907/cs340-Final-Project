@@ -115,12 +115,6 @@ a:visited
 	box-sizing:border-box;
 }
 
-	font-size: 24px;
-	padding: 20px 0 20px 0;
-}
-
-
-.login-form input[type="password"],
 .login-form input[type="text"] {
 	width: 100%;
 	padding: 15px;
@@ -157,24 +151,6 @@ a:visited
         width: 48%;
         padding: 15px;
         float: left;
-.login-form input[type="submit"] {
-	width: 100%;
-	padding: 15px;
-	background-color: #535b63;
-	border: 0;
-	box-sizing: border-box;
-	cursor: pointer;
-	font-weight: bold;
-	color: #ffffff;
-}
-
-
-
-
-.login-form input[name="register"]{
-	margin-top: 10px;
-        width: 42%;
-        padding: 15px;
         background-color: #535b63;
         border: 0;
         box-sizing: border-box;
@@ -208,8 +184,6 @@ a:visited
     font-size: 20px;
 
 }
-
-
 
 
 
