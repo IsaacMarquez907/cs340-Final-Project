@@ -79,10 +79,6 @@ app.get('/', connectDb, function(req, res) {
  *If it is a successful login in the user will go back to the home page
  *
  */
-<<<<<<< HEAD
-var loggedin = false;
-=======
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 app.post('/auth', connectDb, function(req, res) {
 
 	var email = req.body.email;
@@ -98,10 +94,6 @@ app.post('/auth', connectDb, function(req, res) {
 				//confirm password is correct
 				if(bcrypt.compareSync(password, results[0].password)){
 					req.session.loggedin = true;
-<<<<<<< HEAD
-					loggedin = true;
-=======
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 					res.redirect('/home'); //send to home
 				}else{
 									
@@ -138,7 +130,6 @@ app.post('/insert', connectDb, function(req, res) {
 	var name = req.body.name;
 	var email = req.body.email;
 	let password = bcrypt.hashSync(req.body.password, 10);
-<<<<<<< HEAD
 
 
 	//if user has inputed password and email attempt to insert the data with the hashed password
@@ -186,47 +177,10 @@ app.get('/logout', function(req, res) {
 
 	req.session.loggedin = false;
 	res.redirect('/home');
-=======
-
-
-	//if user has inputed password and email attempt to insert the data with the hashed password
-	if(email && password && name){
-		console.log('inserting into database');
-		req.db.query('INSERT INTO passwords (email, password, name) VALUES (?, ?, ?)', [email, password, name], function(err, results, fields){
-
-			//if error out, then becuase duplicate 
-			if(err){
-				
-				//TODO -- add error message saying already exist someone with that email
-	
-				console.log('unsuccessful insert');	
-				res.redirect('/register'); //send back to reg. page			
-
-			}else{
-				
-				//if successful login, then set variable and send to the home page
-				console.log('successful insert');
-				req.session.loggedin= true;
-				res.redirect('/home');
-		
-			}
-
-			res.end();
-		});
-	}else{
-
-		//should never get here becuase ever field is required
-		res.end();
-		
-	}
-	
-
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 
 });
 
 
-<<<<<<< HEAD
 app.post('/insert-rating', connectDb, function(req, res) {
 
 	//all of the data to insert into the rating tuple in the db
@@ -277,16 +231,12 @@ app.post('/insert-rating', connectDb, function(req, res) {
 });	
 
 
-=======
-
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 /*
  *
  *All of the routings for the generic pages in the webiste
  *
  */
 app.get("/home", (req, res) => {
-<<<<<<< HEAD
 	if(req.session.loggedin == true){
 		res.render("home", {logStatus: "true"});
 	}else{
@@ -302,7 +252,6 @@ app.get("/Terms", (req, res) => {
 });
 app.get("/Classes", connectDb, (req, res) => {
 	req.db.query('SELECT * FROM Class', (err, results) => {
-=======
 	res.render("home");
 });
 app.get("/Terms", (req, res) => {
@@ -310,7 +259,6 @@ app.get("/Terms", (req, res) => {
 });
 app.get("/Classes", (req, res) => {
 	req.db.query('SELECT * FROM Class'), (err, results) => {
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 		if (err) throw err;
 		console.log(results);
 		res.render("Classes", {results:results});
@@ -318,22 +266,18 @@ app.get("/Classes", (req, res) => {
 	});
 });
 app.get("/ratings", (req, res) => {
-<<<<<<< HEAD
 	if(req.session.loggedin == true){
 		res.render("ratings", {logStatus: "true"});
 	}else{
 		res.render("ratings");
 	}
-=======
         res.render("ratings");
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 });
 app.get("/login", (req, res) => {
 	res.render("login");
 });
 app.get("/register", (req, res) => {
 	res.render("register");
-<<<<<<< HEAD
 });
 app.get("/addRating", connectDb, (req, res) => {
 
@@ -345,8 +289,6 @@ app.get("/addRating", connectDb, (req, res) => {
 		close(req);
 
 	});
-=======
->>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 });
 
 
