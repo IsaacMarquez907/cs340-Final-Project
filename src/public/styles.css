@@ -101,6 +101,7 @@ a:visited
 .login-form h1 {
 	text-align: center;
 	color: #4d4d4d;
+<<<<<<< HEAD
 	font-size: 32px;
 	padding: 20px 0 20px 0;
 }
@@ -115,6 +116,14 @@ a:visited
 	box-sizing:border-box;
 }
 
+=======
+	font-size: 24px;
+	padding: 20px 0 20px 0;
+}
+
+
+.login-form input[type="password"],
+>>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 .login-form input[type="text"] {
 	width: 100%;
 	padding: 15px;
@@ -124,6 +133,7 @@ a:visited
 }
 
 
+<<<<<<< HEAD
 .dropDown{
 	width: 100%;
 	padding: 15px;
@@ -151,6 +161,26 @@ a:visited
         width: 48%;
         padding: 15px;
         float: left;
+=======
+.login-form input[type="submit"] {
+	width: 100%;
+	padding: 15px;
+	background-color: #535b63;
+	border: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+
+
+
+.login-form input[name="register"]{
+	margin-top: 10px;
+        width: 42%;
+        padding: 15px;
+>>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
         background-color: #535b63;
         border: 0;
         box-sizing: border-box;
@@ -161,6 +191,7 @@ a:visited
 
 }
 
+<<<<<<< HEAD
 .login-form input[name="home"]{
 	margin-top: 10px;
         width: 48%;
@@ -185,6 +216,10 @@ a:visited
 
 }
 
+=======
+
+
+>>>>>>> d0f869593d6b81dae79240ca678c45d1d41894a7
 
 
 
