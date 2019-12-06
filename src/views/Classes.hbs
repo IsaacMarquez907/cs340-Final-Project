@@ -1,41 +1,58 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <link rel="stylesheet" href = "styles.css">
-        <title>RateMyStudents: Classes</title>
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="header">
-                <h1>Classes Offered</h1>
-                <div id="menuBar">
-                    <table>
-                        <tr><td><a href="/home">Home</a></td></tr>
-                        <tr><td><a href="/Classes">Classes</a></td></tr>
-                        <tr><td><a href="/ratings">Ratings</a></td></tr>
-                        <tr><td><a href="/Terms">Terms</a></td></tr>
-                       {{#if logStatus}}
-                        {{else}}
-                            <tr><td><a href="/login">Login</a></td></tr>
-                        {{/if}}
-                       {{#if logStatus}}
-                            <tr><td><a href="/addRating">Add Rating</a></td></tr>
-                        {{/if}}
-                       {{#if logStatus}}
-                            <tr><td><a href="/logout">Logout</a></td></tr>
-                        {{/if}}
-                    </table>
-                </div>
-            </div>
-            <div id="mainContent">
-            	<table>
+
+<head>
+  <title>Classes_page</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- Title on every page -->
+          <h1><a href="/home">Rate<span class="logo_colour">MyStudents</span></a></h1>
+          <h2>Avoid those nasty, uninspired students.</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- main links on top of page-->
+          <li><a href="/home">Home</a></li>
+          <li><a href="/ratings">Ratings</a></li>
+          <li  class="selected"><a href="/Classes">Classes</a></li>
+          <li><a href="/Terms">Terms</a></li>
+          <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
+        </ul>
+      </div>
+    </div>
+	<div id="site_content">
+		<div id="sidebar_container">
+			<div class="sidebar">
+			<div class="sidebar_top"></div>
+			<div class="sidebar_item">
+				<!-- sidebar items -->
+				<h3>Ratings by class</h3>
+				<p>If you click on a class, it will take you to a list of all the students currently with ratings in the class. </p>
+			</div>
+			<div class="sidebar_base"></div>
+			</div>
+		</div>
+       <div id="content">
+        <!-- login page info -->
+             	<table>
 			<thead>
 				<th>Class Name</th>
 				<th>CourseID</th>
 				<th>Department</th>
 				<th>Username</th>
 			</thead>
-
 			<tbody>
 				{{#each results}}
 				<tr>
@@ -56,10 +73,9 @@
 			</tbody>
 		</table>
 		
-	    </div>
-            <div id="footer">
-                <p5>Created by the GOAT Development team in 2019</p5>
-            </div>
-        </div>
-    </body>
+      </div>
+	</div>  
+  </div>
+</body>
 </html>
+

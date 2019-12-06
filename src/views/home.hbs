@@ -1,38 +1,83 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <link rel="stylesheet" href = "styles.css">
-        <title>Rate My Students: Welcome</title>
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="header">
-                <h1>Rate My Students</h1>
-                <div id="menuBar">
-                    <table>
-                        <tr><td><a href="/home">Home</a></td></tr>
-                        <tr><td><a href="/Classes">Classes</a></td></tr>
-                        <tr><td><a href="/ratings">Ratings</a></td></tr>
-                        <tr><td><a href="/Terms">Terms</a></td></tr>
-                       {{#if logStatus}}
-                        {{else}}
-                            <tr><td><a href="/login">Login</a></td></tr>
-                        {{/if}}
-                       {{#if logStatus}}
-                            <tr><td><a href="/addRating">Add Rating</a></td></tr>
-                        {{/if}}
-                       {{#if logStatus}}
-                            <tr><td><a href="/logout">Logout</a></td></tr>
-                        {{/if}}
-                    </table>
-                </div>
-            </div>
-            <div id="mainContent">
-                <p1>The go to place to see what students are nice to have in class and which ones suck.</p1><br>
-            </div>
-            <div id="footer">
-                <p3>Created by the GOAT Development team in 2019</p3>
-            </div>
+
+<head>
+  <title>home_page</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- Title on every page -->
+          <h1><a href="/home">Rate<span class="logo_colour">MyStudents</span></a></h1>
+          <h2>Avoid those nasty, uninspired students.</h2>
         </div>
-    </body>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- main links on top of page-->
+          <li class="selected"><a href="/home">Home</a></li>
+          <li><a href="/ratings">Ratings</a></li>
+          <li><a href="/Classes">Classes</a></li>
+          <li><a href="/Terms">Terms</a></li>
+          <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
+        </ul>
+      </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div id="banner"></div>
+	  <div id="sidebar_container">
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <!-- sidebar items -->
+            <h3>Latest News</h3>
+            <h4>Record high users</h4>
+            <h5>December 1st, 2019</h5>
+            <p>As of the launch date, December 2019, we already have 4,000 happy users who have avoided countless ill equiped students</p>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+        <div class="sidebar">
+          <div class="sidebar_top"></div>
+          <div class="sidebar_item">
+            <h3>Links</h3>
+            <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/Ratings">Ratings</a></li>
+              <li><a href="/Classes">Classes</a></li>
+              <li><a href="/Terms">Terms</a></li>
+              <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
+
+            </ul>
+          </div>
+          <div class="sidebar_base"></div>
+        </div>
+      </div>
+      <div id="content">
+        <!-- page content -->
+        <h1>Welcome to the Rate my students</h1>
+        <p>This is the go to place for professors looking to weed out the trouble-makers and slackers. No where else on the internet can you get an unbiased opinion on a student from a professor. </p>
+        <p>For students and Professors alike, you will not leave this website without finding out who is the good, and more importantly, the bad students.</p>
+        <p>If you are a professor go ahead a login <a href="/login">here</a> and get started in the great world of judging students.</p>
+        <h2>Liability</h2>
+        <p>We at RateMyStudents are in no way, shape, or form, liable for students missing out on education or enrollment in classes, due to their behaviors being highlighted and brodcasted out via our site. </p>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      <p>Develped by group 10 for cs340 | Contact us at marquezi@oregonstate.edu</p>
+      <p>Copyright &copy; simplestyle_banner | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">HTML5 Web Templates</a></p>
+    </div>
+  </div>
+</body>
 </html>

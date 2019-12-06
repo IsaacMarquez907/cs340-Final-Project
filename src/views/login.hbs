@@ -1,22 +1,75 @@
-<DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-	<body>
-		<div class="login-form">
-			<h1>Login Form</h1>
-			<form action="auth" method="POST">
-				<input type="text" name="email" placeholder="Email" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<input type="submit">
-			</form>
+
+<head>
+  <title>login_page</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- Title on every page -->
+          <h1><a href="/home">Rate<span class="logo_colour">MyStudents</span></a></h1>
+          <h2>Avoid those nasty, uninspired students.</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- main links on top of page-->
+          <li><a href="/home">Home</a></li>
+          <li><a href="/ratings">Ratings</a></li>
+          <li><a href="/Classes">Classes</a></li>
+          <li><a href="/Terms">Terms</a></li>
+          <li class="selected">{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
+          <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
+        </ul>
+      </div>
+    </div>
+	<div id="site_content">
+		<div id="sidebar_container">
+			<div class="sidebar">
+			<div class="sidebar_top"></div>
+			<div class="sidebar_item">
+				<!-- sidebar items -->
+				<h3>Note</h3>
+				<p>We promise to never sell your meta-data to a third party company... well, maybe once or twice, if they give us a lot of money.</p>
+			</div>
+			<div class="sidebar_base"></div>
+			</div>
+			<div class="sidebar">
+			<div class="sidebar_top"></div>
+			<div class="sidebar_item">
+				<h3>Register Here</h3>
+				<ul>
+				<li><a href="/register">Register</a></li>
+				</ul>
+			</div>
+			<div class="sidebar_base"></div>
+			</div>
 		</div>
-		<div class="login-form">
-			<form action="/register">				
-				<input type="submit" name="register" value="Register">
-			</form>
-			<form action="/home">				
-					<input type="submit" name="home" value="Home">
-			</form>
-		</div>
-	</body>
+       <div id="content">
+        <!-- login page info -->
+        <h1>Log in</h1>
+        <p>Professors with an account login below, if you don't have an account register with the link to the right:</p>       
+		<form action = "auth" method= "POST">
+			<div class="form_settings">
+				<p><span>Username</span><input class="contact" type="text" name="username" value="" required/></p>
+				<p><span>Password</span><input class="contact" type="password" name="password" value="" required/></p>
+				<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="login_submitted" value="submit" /></p>
+			</div>   
+		</form>    
+      </div>
+	</div>  
+  </div>
+</body>
 </html>
+
+
 
