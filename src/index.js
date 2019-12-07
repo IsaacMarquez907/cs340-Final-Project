@@ -98,15 +98,13 @@ app.post('/auth', connectDb, function(req, res) {
 					res.redirect('/home'); //send to home
 				}else{
 									
-					//TODO -- add error message saying email or password is wrong
-					res.redirect('/login');	//send back to login			
+					res.redirect('/login_fail');	//send back to login			
 
 				}
 
 			} else {
-				res.redirect('/login'); //send back to login
+				res.redirect('/login_fail'); //send back to login
 
-				//TODO -- add error message saying emai or password is wrong
 
 			}			
 			res.end();
@@ -241,24 +239,56 @@ app.get("/home", (req, res) => {
 	}	
 });
 
-app.get("/Terms", connectDb, (req, res) => {
-	req.db.query('SELECT DISTINCT T.year, T.Season, R.student_id, C.course_id, R.comment FROM Term T, has H, Class C, takes T2, Student S, Rating R WHERE T.year = H.year AND T.Season = H.season AND H.course_id = C.course_id AND C.course_id = T2.course_id AND T2.student_id = R.student_id', (err, results) => {
+
+
+
+app.get("/Students", connectDb, (req, res) => {
+	req.db.query('SELECT * FROM Student', (err, results) => {
 	  if (err) throw err;
 
 	  if(req.session.loggedin == true){
-			res.render("Terms", {logStatus: "true", results:results});
+			res.render("Students", {logStatus: "true", results:results});
 		}else{
-			res.render("Terms", {results:results});
+			res.render("Students", {results:results});
 		}	
 
 	  close(req);
 	});
 });
-	  
+app.post("/ratings_student", connectDb, (req, res) => {
+
+	//get course id of class to populate ratings with
+	var studentID = req.body.sid;
+	console.log(studentID);
+
+	//if user has inputed password and email search for the given email
+	if (studentID) {
+		req.db.query('SELECT R.student_id, S.name as sname, H.season, H.year, R.course_id,C.name ,R.number_scale,R.comment FROM Rating R, Student S,has H, Professor P, Class C WHERE R.student_id = ? AND S.student_id = ? AND H.course_id = R.course_id AND R.course_id= C.course_id GROUP BY R.course_id;',[studentID, studentID], function(err, results, fields) {
+			if(err) throw err;
+
+			if (results.length > 0) {
+			
+				if(req.session.loggedin == true){
+					res.render("ratings_student", {logStatus: "true", results:results});
+				}else{
+					res.render("ratings_student", {results:results});
+				}	
+			
+			}
+
+			close(req);
+		});
+	}
+});
+
+
+
+
+
+
 app.get("/Classes", connectDb, (req, res) => {
 	req.db.query('SELECT * FROM Class', (err, results) => {
 		if (err) throw err;
-		console.log(results);
 
 		if(req.session.loggedin == true){
 			res.render("Classes", {logStatus: "true", results:results});
@@ -269,6 +299,37 @@ app.get("/Classes", connectDb, (req, res) => {
 		close(req);
 	});
 });
+app.post("/ratings_class", connectDb, (req, res) => {
+
+	//get course id of class to populate ratings with
+	var courseID = req.body.cid;
+	console.log(courseID);
+
+	//if user has inputed password and email search for the given email
+	if (courseID) {
+		req.db.query('SELECT R.comment, R.number_scale, R.student_id, R.course_id, S.name, S.student_id FROM Student S, Rating R WHERE S.student_id = R.student_id AND R.course_id = ?;', [courseID], function(err, results, fields) {
+			if(err) throw err;
+
+			if (results.length > 0) {
+			
+				if(req.session.loggedin == true){
+					res.render("ratings_class", {logStatus: "true", results:results});
+				}else{
+					res.render("ratings_class", {results:results});
+				}	
+			
+			}
+
+			close(req);
+		});
+	}
+});
+
+
+
+
+
+
 app.get("/ratings", connectDb, (req, res) => {
 	req.db.query('SELECT DISTINCT R.student_id, S.name, T.year, T.Season, C.course_id, R.comment FROM Term T, has H, Class C, takes T2, Student S, Rating R WHERE T.year = H.year AND T.Season = H.season AND H.course_id = C.course_id AND C.course_id = T2.course_id AND T2.student_id = R.student_id AND H.course_id = T2.course_id AND S.student_id = R.student_id GROUP BY R.student_id', (err, results) => {
 	  if (err) throw err;
@@ -282,9 +343,24 @@ app.get("/ratings", connectDb, (req, res) => {
 	});
   });
 
+
+
+
+
+
+
 app.get("/login", (req, res) => {
 	res.render("login");
 });
+app.get("/login_fail", (req, res) => {
+	res.render("login_fail");
+});
+
+
+
+
+
+
 app.get("/register", (req, res) => {
 	if(req.session.loggedin == true){
 		res.render("register", {logStatus: "true"});
@@ -299,6 +375,12 @@ app.get("/register_fail", (req, res) => {
 		res.render("register_fail");
 	}
 });
+
+
+
+
+
+
 app.get("/addRating", connectDb, (req, res) => {
 
 	req.db.query('SELECT * FROM Term', (err, results) => {
@@ -308,9 +390,9 @@ app.get("/addRating", connectDb, (req, res) => {
 		
 		//also send logged in data
 		if(req.session.loggedin == true){
-			res.render("addRating", {logStatus: "true", terms: results});
+			res.render("addRating", {logStatus: "true", Students: results});
 		}else{
-			res.render("addRating", {terms: results});
+			res.render("addRating", {Students: results});
 		}
 
 		close(req);
@@ -326,17 +408,14 @@ app.get("/addRating_fail", connectDb, (req, res) => {
 		
 		//also send logged in data
 		if(req.session.loggedin == true){
-			res.render("addRating_fail", {logStatus: "true", terms: results});
+			res.render("addRating_fail", {logStatus: "true", Students: results});
 		}else{
-			res.render("addRating_fail", {terms: results});
+			res.render("addRating_fail", {Students: results});
 		}
 
 		close(req);
 
 	});
-});
-app.get("/login_fail", (req, res) => {
-	res.render("login_fail");
 });
 
 

@@ -25,7 +25,7 @@
           <li><a href="/home">Home</a></li>
           <li><a href="/ratings">Ratings</a></li>
           <li><a href="/Classes">Classes</a></li>
-          <li><a href="/Terms">Terms</a></li>
+          <li><a href="/Students">Students</a></li>
           <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
           <li class="selected">{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
@@ -41,7 +41,7 @@
 			<div class="form_settings">
 				<p><span>Student ID</span><input class="contact" type="text" name="studentID" placeholder="" required/></p>
 				<p><span>Student Full Name</span><input class="contact" type="text" name="name" placeholder="" required/></p>
-                                <p><span>Rate (Student On scale of 7-233)</span><select class="dropDown" name="term">{{#each terms}}<option>{{this.Season}}, {{this.year}}</option>{{/each}}</select></p>
+                                <p><span>Rate (Student On scale of 7-233)</span><select class="dropDown" name="term">{{#each Students}}<option>{{this.Season}}, {{this.year}}</option>{{/each}}</select></p>
                                 <p><span>Course ID</span><input class="contact" type="text" name="class" placeholder="" required/></p>
 				<p><span>Rate (Student On scale of 7-233)</span><input class="contact" type="text" name="scale" placeholder="" required/></p>
                                 <p><span>Comment (max 288 Characters)</span><textarea class="contact" type="text" rows="8" cols="50"  name="comment"/></textarea></p>

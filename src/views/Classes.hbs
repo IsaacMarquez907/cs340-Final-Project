@@ -25,7 +25,7 @@
           <li><a href="/home">Home</a></li>
           <li><a href="/ratings">Ratings</a></li>
           <li  class="selected"><a href="/Classes">Classes</a></li>
-          <li><a href="/Terms">Terms</a></li>
+          <li><a href="/Students">Students</a></li>
           <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
@@ -46,27 +46,28 @@
 		</div>
        <div id="content">
         <!-- login page info -->
-             	<table>
+            <table>
 			<thead>
 				<th>Class Name</th>
 				<th>CourseID</th>
 				<th>Department</th>
-				<th>Username</th>
 			</thead>
 			<tbody>
 				{{#each results}}
 				<tr>
 					<td>
-						{{this.name}}
+						<form action="ratings_class" method="POST">
+							<div>
+							<input class="contact" type="hidden" id="course_id" name="cid" value={{this.course_id}} required>
+							<input class="class-button" type="submit" name="course_name" value="{{this.name}}" />
+							</div>
+						</form>
 					</td>
-					<td>
+					<td name="courseID">
 						{{this.course_id}}
 					</td>
 					<td>
 						{{this.department}}
-					</td>
-					<td>
-						{{this.username}}
 					</td>
 				</tr>
 				{{/each}}

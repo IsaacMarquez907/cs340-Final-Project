@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Classes_page</title>
+  <title>Students_page</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
@@ -23,9 +23,9 @@
         <ul id="menu">
           <!-- main links on top of page-->
           <li><a href="/home">Home</a></li>
-          <li class="selected"><a href="/ratings">Ratings</a></li>
+          <li><a href="/ratings">Ratings</a></li>
           <li><a href="/Classes">Classes</a></li>
-          <li><a href="/Students">Students</a></li>
+          <li  class="selected"><a href="/Students">Students</a></li>
           <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
@@ -38,43 +38,32 @@
 			<div class="sidebar_top"></div>
 			<div class="sidebar_item">
 				<!-- sidebar items -->
-				<h3>List of all ratings</h3>
-				<p>You will find a list of all the ratings in our database on this page. To find rating by class, go to the class page.</p>
+				<h3>Ratings by Students</h3>
+				<p>If you click on a student, it will take you to a list of all the ratings for that student. </p>
 			</div>
 			<div class="sidebar_base"></div>
 			</div>
 		</div>
        <div id="content">
         <!-- login page info -->
-        {{#each results}}
              	<table>
 			<thead>
 				<th>Student ID</th>
-				<th>Student name</th>
-				<th>Year</th>
-				<th>Season</th>
-                <th>Course ID</th>
-                <th>comment</th>
+				<th>Student Name</th>
 			</thead>
 			<tbody>
+				{{#each results}}
 				<tr>
 					<td>
-						{{this.student_id}}
+						<form action="ratings_student" method="POST">
+							<div>
+								<input class="contact" type="hidden" id="student_id" name="sid" value={{this.student_id}} required>
+								<input class="class-button" type="submit" name="course_id" value="{{this.student_id}}" />
+							</div>
+						</form>
 					</td>
 					<td>
 						{{this.name}}
-					</td>
-					<td>
-						{{this.year}}
-					</td>
-					<td>
-						{{this.Season}}
-					</td>
-                    <td>
-						{{this.course_id}}
-					</td>
-                    <td>
-						{{this.comment}}
 					</td>
 				</tr>
 				{{/each}}
@@ -86,3 +75,4 @@
   </div>
 </body>
 </html>
+

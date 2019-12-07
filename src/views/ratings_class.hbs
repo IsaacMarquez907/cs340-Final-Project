@@ -23,8 +23,8 @@
         <ul id="menu">
           <!-- main links on top of page-->
           <li><a href="/home">Home</a></li>
-          <li class="selected"><a href="/ratings">Ratings</a></li>
-          <li><a href="/Classes">Classes</a></li>
+          <li><a href="/ratings">Ratings</a></li>
+          <li  class="selected"><a href="/Classes">Classes</a></li>
           <li><a href="/Students">Students</a></li>
           <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
@@ -38,22 +38,20 @@
 			<div class="sidebar_top"></div>
 			<div class="sidebar_item">
 				<!-- sidebar items -->
-				<h3>List of all ratings</h3>
-				<p>You will find a list of all the ratings in our database on this page. To find rating by class, go to the class page.</p>
+				<h3>Back to Classes</h3>
+				<p>Hit back on browser or classes tab to get back to class page. </p>
 			</div>
 			<div class="sidebar_base"></div>
 			</div>
 		</div>
        <div id="content">
         <!-- login page info -->
-        {{#each results}}
+         {{#each results}}
              	<table>
 			<thead>
 				<th>Student ID</th>
 				<th>Student name</th>
-				<th>Year</th>
-				<th>Season</th>
-                <th>Course ID</th>
+				<th>Number Score</th>
                 <th>comment</th>
 			</thead>
 			<tbody>
@@ -65,13 +63,7 @@
 						{{this.name}}
 					</td>
 					<td>
-						{{this.year}}
-					</td>
-					<td>
-						{{this.Season}}
-					</td>
-                    <td>
-						{{this.course_id}}
+						{{this.number_scale}}
 					</td>
                     <td>
 						{{this.comment}}
@@ -80,9 +72,9 @@
 				{{/each}}
 			</tbody>
 		</table>
-		
       </div>
 	</div>  
   </div>
 </body>
 </html>
+
