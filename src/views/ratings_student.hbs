@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Terms_page</title>
+  <title>Students_page</title>
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
@@ -25,7 +25,7 @@
           <li><a href="/home">Home</a></li>
           <li><a href="/ratings">Ratings</a></li>
           <li><a href="/Classes">Classes</a></li>
-          <li  class="selected"><a href="/Terms">Terms</a></li>
+          <li  class="selected"><a href="/Students">Students</a></li>
           <li>{{#if logStatus}}{{else}}<a href="/login">Login</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/addRating">Add Rating</a>{{/if}}</li>
           <li>{{#if logStatus}}<a href="/logout">Log Out</a>{{/if}}</li>
@@ -38,46 +38,29 @@
 			<div class="sidebar_top"></div>
 			<div class="sidebar_item">
 				<!-- sidebar items -->
-				<h3>Ratings by class</h3>
-				<p>If you click on a class, it will take you to a list of all the students currently with ratings in the class. </p>
+				<h3>Back to Students</h3>
+				<p>Hit back on browser or students tab to get back to students page.</p>
 			</div>
 			<div class="sidebar_base"></div>
 			</div>
 		</div>
        <div id="content">
         <!-- login page info -->
-             	<table>
-			<thead>
-				<th>Year</th>
-				<th>Season</th>
-				<th>Student</th>
-				<th>Course ID</th>
-                <th>comment</th>
+        <h1 class="h1-page-title">{{title}}</h1>
 
+      {{#each results}}
+		<table class="table-ratings">
+			<thead>
+				<th><b>{{this.name}}, {{this.season}}, {{this.year}}</b></th>	
 			</thead>
 			<tbody>
-				{{#each results}}
-				<tr>
-					<td>
-						{{this.year}}
-					</td>
-					<td>
-						{{this.Season}}
-					</td>
-					<td>
-						{{this.student_id}}
-					</td>
-					<td>
-						{{this.course_id}}
-					</td>
-                    <td>
-						{{this.comment}}
-					</td>
-				</tr>
-				{{/each}}
+				<td>
+					{{this.comment}} 
+
+					<h4 class="h4-ratings">number rating: {{this.number_scale}}</h4>
+				</td>
 			</tbody>
-		</table>
-		
+		 {{/each}}
       </div>
 	</div>  
   </div>
