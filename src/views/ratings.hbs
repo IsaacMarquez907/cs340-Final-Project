@@ -44,43 +44,21 @@
 			<div class="sidebar_base"></div>
 			</div>
 		</div>
-       <div id="content">
+		<div id="content">
         <!-- login page info -->
-        {{#each results}}
-             	<table>
+         {{#each results}}
+		<table class="table-ratings">
 			<thead>
-				<th>Student ID</th>
-				<th>Student name</th>
-				<th>Year</th>
-				<th>Season</th>
-                <th>Course ID</th>
-                <th>comment</th>
+				<th><b>{{this.student_id}} - {{this.sname}} <div align="right">{{this.name}},{{this.season}}, {{this.year}}</dev></b></th>	
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						{{this.student_id}}
-					</td>
-					<td>
-						{{this.name}}
-					</td>
-					<td>
-						{{this.year}}
-					</td>
-					<td>
-						{{this.Season}}
-					</td>
-                    <td>
-						{{this.course_id}}
-					</td>
-                    <td>
-						{{this.comment}}
-					</td>
-				</tr>
-				{{/each}}
+				<td>
+					{{this.comment}} 
+
+					<h4 class="h4-ratings">number rating: {{this.number_scale}}</h4>
+				</td>
 			</tbody>
-		</table>
-		
+		 {{/each}}
       </div>
 	</div>  
   </div>

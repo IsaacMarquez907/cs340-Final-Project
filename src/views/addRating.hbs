@@ -41,11 +41,13 @@
 			<div class="form_settings">
 				<p><span>Student ID</span><input class="contact" type="text" name="studentID" placeholder="" required/></p>
 				<p><span>Student Full Name</span><input class="contact" type="text" name="name" placeholder="" required/></p>
-                                <p><span>Rate (Student On scale of 7-233)</span><select class="dropDown" name="term">{{#each Students}}<option>{{this.Season}}, {{this.year}}</option>{{/each}}</select></p>
+                                <p><span>Term</span><select class="dropDown" name="term">{{#each Students}}<option>{{this.Season}}, {{this.year}}</option>{{/each}}</select></p>
                                 <p><span>Course ID</span><input class="contact" type="text" name="class" placeholder="" required/></p>
 				<p><span>Rate (Student On scale of 7-233)</span><input class="contact" type="text" name="scale" placeholder="" required/></p>
                                 <p><span>Comment (max 288 Characters)</span><textarea class="contact" type="text" rows="8" cols="50"  name="comment"/></textarea></p>
 				<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="login_submitted" value="submit" /></p>
+
+        <p><br /><br />{{errorMessage}}</p>
 			</div>   
 		</form>    
       </div>

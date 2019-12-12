@@ -22,11 +22,18 @@ h1, h2, h3, h4, h5, h6
   letter-spacing: 0em;
   padding: 0 0 5px 0;}
 
+
 h1, h2, h3
 { font: normal 170% 'century gothic', arial;
   margin: 0 0 15px 0;
   padding: 15px 0 5px 0;
   color: #000;}
+
+.h1-page-title
+{ 
+    margin: 0px 50px 15px 50px;
+    padding: 15px 50px 5px 50px;
+}
 
 h2
 { font-size: 160%;
@@ -41,6 +48,12 @@ h4, h6
 { color: #009FBC;
   padding: 0 0 5px 0;
   font: normal 110% arial;
+  text-transform: uppercase;}
+
+  .h4-ratings
+{ color:#AEB002;
+  padding: 15px 0 5px 0;
+  font: normal 95% arial;
   text-transform: uppercase;}
 
 h5, h6
@@ -324,7 +337,13 @@ ul#menu li a:hover
   margin: 0 0 20px 0;}
   
 table
-{ margin: 10px 0 30px 100px;}
+{ margin: 10px 0 30px 100px;
+    width: 500px;}
+
+.table-ratings
+{ table-layout: fixed;
+   width: 500px;
+}
 
 table tr th, table tr td
 { background: #3B3B3B;
@@ -341,7 +360,7 @@ table tr td
 {
     width:100%;
     height:60px;
-    margin-right: 200px;
+    margin-right: 150px;
     display:block;
     background-color:#E5E5DB;
     color: #AEB002;

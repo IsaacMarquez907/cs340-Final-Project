@@ -12,6 +12,7 @@ const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 
 const app = express();
@@ -98,13 +99,15 @@ app.post('/auth', connectDb, function(req, res) {
 					res.redirect('/home'); //send to home
 				}else{
 									
-					res.redirect('/login_fail');	//send back to login			
+					req.session.error = true;
+					res.redirect('/login');	//send back to login			
 
 				}
 
 			} else {
-				res.redirect('/login_fail'); //send back to login
 
+				req.session.error = true;
+				res.redirect('/login');	//send back to login
 
 			}			
 			res.end();
@@ -139,7 +142,8 @@ app.post('/insert', connectDb, function(req, res) {
 					
 		
 					console.log('unsuccessful insert');	
-					res.redirect('/register_fail'); //send back to reg. page			
+					req.session.error = true;
+					res.redirect('/register'); //send back to reg. page			
 
 				}else{
 					
@@ -198,9 +202,14 @@ app.post('/insert-rating', connectDb, function(req, res) {
 
 			//if error out, then becuase duplicate 
 			if(err){
-				
+				var errorM = err.message;
+				var errorM2 = errorM.slice((errorM.indexOf(":") + 2), errorM.length);
+
 				console.log('unsuccessful insert');	
-				res.redirect('/addRating_fail'); //send back to reg. page			
+				req.session.error = true; //record that there was an error
+				req.session.errorMessage = errorM2;
+				console.log(req.session.errorMessage);
+				res.redirect("/addRating"); //send back to reg. page			
 
 			}else{
 				
@@ -268,10 +277,14 @@ app.post("/ratings_student", connectDb, (req, res) => {
 
 			if (results.length > 0) {
 			
+				//get name of student for title
+				var title = results[0].sname;
+				console.log(title);
+
 				if(req.session.loggedin == true){
-					res.render("ratings_student", {logStatus: "true", results:results});
+					res.render("ratings_student", {logStatus: "true", results:results, title: title});
 				}else{
-					res.render("ratings_student", {results:results});
+					res.render("ratings_student", {results:results, title: title});
 				}	
 			
 			}
@@ -307,15 +320,19 @@ app.post("/ratings_class", connectDb, (req, res) => {
 
 	//if user has inputed password and email search for the given email
 	if (courseID) {
-		req.db.query('SELECT R.comment, R.number_scale, R.student_id, R.course_id, S.name, S.student_id FROM Student S, Rating R WHERE S.student_id = R.student_id AND R.course_id = ?;', [courseID], function(err, results, fields) {
+		req.db.query('SELECT R.comment, R.number_scale, R.student_id, R.course_id, S.name, S.student_id, C.name as cname FROM Student S, Rating R, Class C WHERE S.student_id = R.student_id AND C.course_id = ? AND R.course_id = ?;', [courseID, courseID], function(err, results, fields) {
 			if(err) throw err;
 
 			if (results.length > 0) {
+
+				//get name of class for title
+				var title = results[0].cname;								console.log(title);
+				
 			
 				if(req.session.loggedin == true){
-					res.render("ratings_class", {logStatus: "true", results:results});
+					res.render("ratings_class", {logStatus: "true", results:results, title: title});
 				}else{
-					res.render("ratings_class", {results:results});
+					res.render("ratings_class", {results:results, title: title});
 				}	
 			
 			}
@@ -331,7 +348,7 @@ app.post("/ratings_class", connectDb, (req, res) => {
 
 
 app.get("/ratings", connectDb, (req, res) => {
-	req.db.query('SELECT DISTINCT R.student_id, S.name, T.year, T.Season, C.course_id, R.comment FROM Term T, has H, Class C, takes T2, Student S, Rating R WHERE T.year = H.year AND T.Season = H.season AND H.course_id = C.course_id AND C.course_id = T2.course_id AND T2.student_id = R.student_id AND H.course_id = T2.course_id AND S.student_id = R.student_id GROUP BY R.student_id', (err, results) => {
+	req.db.query('SELECT R.student_id, R.submissionID, S.name as sname, H.season, H.year, R.course_id,C.name ,R.number_scale,R.comment FROM Rating R, Student S,has H, Professor P, Class C WHERE R.student_id = S.student_id AND H.course_id = R.course_id AND R.course_id= C.course_id GROUP BY R.submissionID;', (err, results) => {
 	  if (err) throw err;
 
 	  if(req.session.loggedin == true){
@@ -350,10 +367,12 @@ app.get("/ratings", connectDb, (req, res) => {
 
 
 app.get("/login", (req, res) => {
-	res.render("login");
-});
-app.get("/login_fail", (req, res) => {
-	res.render("login_fail");
+	if(req.session.error){
+		res.render("login", {errorMessage: "*Wrong email or password"});
+		req.session.error = false;
+	}else{
+		res.render("login", {errorMessage: ""});
+	}
 });
 
 
@@ -363,16 +382,19 @@ app.get("/login_fail", (req, res) => {
 
 app.get("/register", (req, res) => {
 	if(req.session.loggedin == true){
-		res.render("register", {logStatus: "true"});
+		if(req.session.error){
+			res.render("register", {logStatus: "true", errorMessage: "*Username already taken"});
+			req.session.error = false;
+		}else{
+			res.render("register", {logStatus: "true", errorMessage: ""});
+		}
 	}else{
-		res.render("register");
-	}
-});
-app.get("/register_fail", (req, res) => {
-	if(req.session.loggedin == true){
-		res.render("register_fail", {logStatus: "true"});
-	}else{
-		res.render("register_fail");
+		if(req.session.error){
+			res.render("register", {errorMessage: "*Username already taken"});
+			req.session.error = false;
+		}else{
+			res.render("register", {errorMessage: ""});
+		}
 	}
 });
 
@@ -383,23 +405,6 @@ app.get("/register_fail", (req, res) => {
 
 app.get("/addRating", connectDb, (req, res) => {
 
-	req.db.query('SELECT * FROM Term', (err, results) => {
-		
-		if(err) throw err;
-		console.log(results);
-		
-		//also send logged in data
-		if(req.session.loggedin == true){
-			res.render("addRating", {logStatus: "true", Students: results});
-		}else{
-			res.render("addRating", {Students: results});
-		}
-
-		close(req);
-
-	});
-});
-app.get("/addRating_fail", connectDb, (req, res) => {
 
 	req.db.query('SELECT * FROM Term', (err, results) => {
 		
@@ -408,16 +413,25 @@ app.get("/addRating_fail", connectDb, (req, res) => {
 		
 		//also send logged in data
 		if(req.session.loggedin == true){
-			res.render("addRating_fail", {logStatus: "true", Students: results});
+			if(req.session.error){
+				res.render("addRating", {logStatus: "true", Students: results, errorMessage: req.session.errorMessage});
+				req.session.error = false;
+			}else{
+				res.render("addRating", {logStatus: "true", Students: results, errorMessage: ""});
+			}
 		}else{
-			res.render("addRating_fail", {Students: results});
+			if(req.session.error){
+				res.render("addRating", {Students: results, errorMessage: req.session.errorMessage});
+				req.session.error = false;
+			}else{
+				res.render("addRating", {Students: results, errorMessage: ""});
+			}
 		}
 
 		close(req);
 
 	});
 });
-
 
 
 /**

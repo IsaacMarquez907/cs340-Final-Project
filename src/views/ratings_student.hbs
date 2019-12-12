@@ -46,47 +46,21 @@
 		</div>
        <div id="content">
         <!-- login page info -->
-         {{#each results}}
-             	<table>
+        <h1 class="h1-page-title">{{title}}</h1>
+
+      {{#each results}}
+		<table class="table-ratings">
 			<thead>
-				<th>Student ID</th>
-				<th>Student name</th>
-				<th>Season</th>
-                <th>Year</th>
-				<th>Course ID</th>
-				<th>Professor</th>
-				<th>Number Rating</th>
-				<th>Comment</th>
+				<th><b>{{this.name}}, {{this.season}}, {{this.year}}</b></th>	
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						{{this.student_id}}
-					</td>
-					<td>
-						{{this.sname}}
-					</td>
-					<td>
-						{{this.season}}
-					</td>
-                    <td>
-						{{this.year}}
-					</td>
-					<td>
-						{{this.course_id}}
-					</td><td>
-						{{this.name}}
-					</td>
-					<td>
-						{{this.number_scale}}
-					</td>
-                    <td>
-						{{this.comment}}
-					</td>
-				</tr>
-				{{/each}}
+				<td>
+					{{this.comment}} 
+
+					<h4 class="h4-ratings">number rating: {{this.number_scale}}</h4>
+				</td>
 			</tbody>
-		</table>
+		 {{/each}}
       </div>
 	</div>  
   </div>
